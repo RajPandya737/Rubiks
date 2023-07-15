@@ -7,6 +7,7 @@ import math
 from colormath.color_objects import LabColor, sRGBColor
 from colormath.color_conversions import convert_color
 from color_diff import *
+import shutil
 
 
 def get_cube ():
@@ -101,16 +102,17 @@ def avg_color (path):
 def real_color (avg):
     colors_hash = {
         'White': (255, 255, 255),
-        'Red': (190, 60, 20),
+        'Red': (255, 80, 75),
         'Blue': (121, 177, 201),
-        'Orange': (255, 85, 37),
+        'Orange': (255, 130, 50),
         'Green': (25, 155, 76),
         'Yellow': (254, 213, 47)
     }
-# Basically a bunch of annopying conversions, convert rgb to sRGB then to 
-# Lab Colors so you can finally compare them using a Delta E equation
-# Find which color is the closest (lower delta E means closer color) and 
-# return a bunch of potentially useful information about that
+
+    # Basically a bunch of annopying conversions, convert rgb to sRGB then to 
+    # Lab Colors so you can finally compare them using a Delta E equation
+    # Find which color is the closest (lower delta E means closer color) and 
+    # return a bunch of potentially useful information about that
 
     avg = sRGBColor(avg[0], avg[1], avg[2]) 
     lab_color = convert_color(avg, LabColor)
@@ -137,8 +139,13 @@ def real_color (avg):
 def main():
     get_cube() # method to get the cubes photos and screenshots
     convert_to_img()
-    squarify(1)
-    print(real_color(avg_color(f"squares/cside{1}.jpg")))
+    for side in range (1, 7):
+        squarify(side)
+        side_color = real_color(avg_color(f"squares/cside{5}.jpg"))[1]
+        for n in range(1, 10):
+            shutil.copyfile(f"squares/cside{n}.jpg", f"faces/{side_color}/cside{n}.jpg")
+            delete_img(f"squares/cside{n}.jpg")
+
 
 
 if __name__ == "__main__":
