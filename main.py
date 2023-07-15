@@ -18,7 +18,7 @@ while True:
     ret, frame = webcam.read()
 
     if ret:
-        # Outline, will probably use for loops later, if your reading this, it means im too lazy and havent done it yet
+        # Outline, will probably use for loops later, if your reading this, it means im too lazy and havent done it yet.
 
         cv2.rectangle(frame, (50, 50), (300, 300), BOX_COLOR, 2)  
 
