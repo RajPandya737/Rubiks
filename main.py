@@ -1,7 +1,9 @@
 import cv2
 from config import *
+import numpy as np
+from PIL import Image
 
-def main():
+def get_cube ():
     #gloablish variables
     webcam = cv2.VideoCapture(0)  # Default camera on your system
     side = 1 # Pics taken so far // increments by 1 every time photo taken
@@ -64,4 +66,25 @@ def main():
     webcam.release()
     cv2.destroyAllWindows()
 
-main()
+
+def convert ():
+    for n in range(1, 8):
+        image = Image.open(f"sides/side{n}.jpg")
+
+        # Coordinates for cropping
+        left = 50
+        top = 50
+        right = 300
+        bottom = 300
+
+        cropped_image = image.crop((left, top, right, bottom))
+        cropped_image.save(f"cropped_sides/cside{n}.jpg")
+
+
+def main():
+    get_cube() # method to get the cubes photos and screenshots
+    convert()
+
+
+if __name__ == "__main__":
+    main()
