@@ -23,26 +23,12 @@ def get_cube ():
         ret, frame = webcam.read()
 
         if ret:
-            # Outline, will probably use for loops later, if your reading this, it means im too lazy and havent done it yet.
 
-            cv2.rectangle(frame, (50, 50), (300, 300), BOX_COLOR, 2)  
-
-            # Top Row
-            cv2.rectangle(frame, (50, 50), (133, 133), BOX_COLOR, 2)  
-            cv2.rectangle(frame, (133, 50), (216, 133), BOX_COLOR, 2)  
-            cv2.rectangle(frame, (216, 50), (300, 133), BOX_COLOR, 2)  
-
-            # Middle Row
-
-            cv2.rectangle(frame, (50, 133), (133, 216), BOX_COLOR, 2)  
-            cv2.rectangle(frame, (133, 133), (216, 216), BOX_COLOR, 2)  
-            cv2.rectangle(frame, (216, 133), (300, 216), BOX_COLOR, 2)  
-
-            # Bottom Row
-
-            cv2.rectangle(frame, (50, 216), (133, 300), BOX_COLOR, 2)  
-            cv2.rectangle(frame, (133, 216), (216, 300), BOX_COLOR, 2)  
-            cv2.rectangle(frame, (216, 216), (300, 300), BOX_COLOR, 2)  
+            #Clever little code snippet basically makes the whole square box 
+            for row in range (3):
+                for col in range(3):
+                    cv2.rectangle(frame, (LEFT + col * SPACING, TOP + row*SPACING), (LEFT + (col+1) * SPACING, TOP + (row+1) * SPACING), BOX_COLOR, 2)
+ 
 
             # Display 
             cv2.imshow("Camera Feed", frame)
@@ -66,24 +52,18 @@ def get_cube ():
     webcam.release()
     cv2.destroyAllWindows()
 
-
-def convert ():
-    for n in range(1, 8):
+def convert_to_img ():
+    for n in range(1, 7):
         image = Image.open(f"sides/side{n}.jpg")
 
-        # Coordinates for cropping
-        left = 50
-        top = 50
-        right = 300
-        bottom = 300
-
-        cropped_image = image.crop((left, top, right, bottom))
+        cropped_image = image.crop((LEFT, TOP, RIGHT, BOTTOM))
         cropped_image.save(f"cropped_sides/cside{n}.jpg")
 
 
 def main():
     get_cube() # method to get the cubes photos and screenshots
-    convert()
+    convert_to_img()
+
 
 
 if __name__ == "__main__":
