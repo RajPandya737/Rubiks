@@ -135,16 +135,30 @@ def real_color (avg):
             close_col = (color, color_name)
     return close_col[0], close_col[1], close, avg
 
-
-def main():
-    get_cube() # method to get the cubes photos and screenshots
-    convert_to_img()
+def file_as_color():
     for side in range (1, 7):
         squarify(side)
         side_color = real_color(avg_color(f"squares/cside{5}.jpg"))[1]
         for n in range(1, 10):
             shutil.copyfile(f"squares/cside{n}.jpg", f"faces/{side_color}/cside{n}.jpg")
             delete_img(f"squares/cside{n}.jpg")
+
+def convert_to_np():
+    color_hash = {
+        'White': 1,
+        'Red': 2,
+        'Blue': 3,
+        'Orange': 4,
+        'Green': 5,
+        'Yellow': 6
+    }
+
+def main():
+    get_cube() # method to get the cubes photos and screenshots
+    convert_to_img()
+    file_as_color()
+    convert_to_np()
+
 
 
 
