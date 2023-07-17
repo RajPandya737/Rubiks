@@ -1,5 +1,3 @@
-
-
 """
 This is what the cube looks like, the positive axis are shown below, the faces are white, red, and green denoted by w r, g
 
@@ -18,13 +16,13 @@ white squares oin the z-axis, and green squares on the x-axis
      |      |/
      +------+
 
-    - ---------- + This is the x-axis, right is positive, when a rotation is applied, the piece moves along the x-z plane
+    - ---------- + This is the x-axis, right is positive, when a rotation is applied, the layer moves about the x-axis
 
 
     +
     |
     |
-    |     This is the y-axis, up is positive, when a rotation is applied, the piece moves along the y-z plane
+    |     This is the y-axis, up is positive, when a rotation is applied, the layer moves about the y-axis
     |
     |
     |
@@ -33,7 +31,7 @@ white squares oin the z-axis, and green squares on the x-axis
           -
          /
         /
-       /      This is the z-azis, forward is positive
+       /      This is the z-azis, forward is positive, when a rotation is applied, the layer moves about the z-axis
       /
      /
     +
@@ -54,12 +52,14 @@ def rotation_matrix(axis, n):
 
     # angle_sin = sin(n*pi/2)
     # angle_cos = cos(n*pi/2)
-    if axis == 'y':
+    if axis == "x":
         return np.array([[1,0,0], [0,angle_cos,-1*angle_sin], [0, angle_sin, angle_cos]])
-    elif axis == 'x':
+    elif axis == "y":
         return np.array([[angle_cos,0,angle_sin], [0,1,0], [-1*angle_sin, 0, angle_cos]])
+    elif axis == "z":
+        return np.array([[angle_cos, -1*angle_sin, 0], [angle_sin,angle_cos,0], [0, 0, 1]])
 
-    return 'Error, improper axis format provided'
+    return "Error, improper axis format provided"
 
 class Cubie:
     def __init__(self, x, y, z, colors, type):
@@ -73,50 +73,55 @@ class Cubie:
         # type could be corner, edge, or center
         self.type = type
     
-    def round_pos (self):
+    def round_pos(self):
         self.position = np.array()
 
 
-# Need to add color rotation
-# Rotate function pass along that axis, perpendicular to the other 2 axises
     def rotate_x(self, n):
-        self.position = np.dot(rotation_matrix('x', n), self.position)
-        self.position = np.round(self.position)
-
-        #if rotated on the x-axis, the color facing up/down (y-axis) will not change, but x and z colors will be swapped
+        # The piece moves downwards when facing the white
+        self.position = np.dot(rotation_matrix("x", n), self.position)
         for i in range(n):
-            self.colors = (self.colors[2], self.colors[1], self.colors[0])
+            self.colors = (self.colors[0], self.colors[2], self.colors[1])
         
     def rotate_y(self, n):
-        self.position = np.dot(rotation_matrix('y', n), self.position)
-        self.position = np.round(self.position)
+        self.position = np.dot(rotation_matrix("y", n), self.position)
 
         #If rotated on the y-axis, the color facing the right/left (x-axis) will not change, but the y and z colors will be swapped
         for i in range(n):
-            self.colors = (self.colors[0], self.colors[2], self.colors[1])
+            self.colors = (self.colors[2], self.colors[1], self.colors[0])
+        
+    def rotate_z(self, n):
+        self.position = np.dot(rotation_matrix("z", n), self.position)
+
+        #If rotated on the y-axis, the color facing the right/left (x-axis) will not change, but the y and z colors will be swapped
+        for i in range(n):
+            self.colors = (self.colors[1], self.colors[0], self.colors[2])
 
 
 
+class Cube:
+    def __init__(self, cubies: list):
+        self.cubies = cubies
 
-Piece = Cubie(1, 1, 1, ('g', 'r', 'w'), 'corner')
-Piece.rotate_x(1)
-
-
-# class Cube:
-#     def __init__(self):
-#         self.cubies = []
-
-#     def insert_cubie_single (self, cubie):
-#         self.cubies.append(cubie)
-
-#     def insert_cubie_group (self, cubie_list):
-#         for cubie in cubie_list:
-#             self.cubies.append(cubie)
-#     def __str__(self) -> str:
-#         pass
-
-
-
-
+    def __str__(self):
+        pass
+    
+    def add_cubie(self, cubie):
+        self.cubies.append(cubie)
+    
+    def remove_cubie(self, cubie):
+        self.cubies.remove(cubie)
+    
+    def get_cubies(self):
+        return self.cubies
+    
+    # def rotate_x(self, n, layer):
+    #     for cubie in self.cubies:
+    #         if cubie.position[1] == layer:
+    #             cubie.rotate_x(n)
+    
+    # def rotate_y(self, n, layer):
+    #     for cubie in self.cubies:
+    #         cubie.rotate_y(n)
 
 
