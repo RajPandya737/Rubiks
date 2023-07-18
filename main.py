@@ -124,10 +124,10 @@ def real_color(avg):
     # the name of the color in full, how close it was, the average color of the image analyzed,
     # and the shortform of the color (example Blue become b)
     colors_hash = {
-        "White": (240, 240, 240),
-        "Red": (255, 80, 75),
-        "Blue": (121, 177, 201),
-        "Orange": (255, 130, 50),
+        "White": (130, 148, 194),
+        "Red": (253, 147, 248),
+        "Blue": (110, 195, 254),
+        "Orange": (250, 96, 12),
         "Green": (25, 155, 76),
         "Yellow": (254, 213, 47),
     }
@@ -183,16 +183,122 @@ def convert_to_np():
     # We can start to build the cube from the yellow and white sides, these will always be opposite from each
     # other so if we create every other piece relative to these 2, everything should fit nicely (hopefully)
 
+    #All the centers are already in the cubies list
     cubies = [
         Cubie(0, 0, 1, (None, None, "w"), "center"),
         Cubie(0, 0, -1, (None, None, "y"), "center"),
+        Cubie(0, 1, 0, (None, "r", None), "center"),
+        Cubie(0, -1, 0, (None, "o", None), "center"),
+        Cubie(1, 0, 0, ("g", None, None), "center"),
+        Cubie(-1, 0, 0, ("b", None, None), "center"),
     ]
+
+    #White Side Cubies
 
     color_x = color_function(f"faces/Blue/cside{1}.jpg")
     color_y = color_function(f"faces/Red/cside{3}.jpg")
     color_z = color_function(f"faces/White/cside{1}.jpg")
-
     cubies.append(Cubie(-1, 1, 1, (color_x, color_y, color_z), "corner"))
+
+    color_y = color_function(f"faces/Red/cside{2}.jpg")
+    color_z = color_function(f"faces/White/cside{2}.jpg")
+    cubies.append(Cubie(0, 1, 1, (None, color_y, color_z), "edge"))
+
+    color_x = color_function(f"faces/Green/cside{3}.jpg")
+    color_y = color_function(f"faces/Red/cside{1}.jpg")
+    color_z = color_function(f"faces/White/cside{3}.jpg")
+    cubies.append(Cubie(1, 1, 1, (color_x, color_y, color_z), "corner"))
+
+    color_x = color_function(f"faces/Blue/cside{2}.jpg")
+    color_z = color_function(f"faces/White/cside{4}.jpg")
+    cubies.append(Cubie(-1, 0, 1, (color_x, None, color_z), "edge"))
+
+
+    color_x = color_function(f"faces/Green/cside{2}.jpg")
+    color_z = color_function(f"faces/White/cside{6}.jpg")
+    cubies.append(Cubie(1, 0, 1, (color_x, None, color_z), "edge"))
+
+    color_x = color_function(f"faces/Blue/cside{3}.jpg")
+    color_y = color_function(f"faces/Orange/cside{1}.jpg")
+    color_z = color_function(f"faces/White/cside{7}.jpg")
+    cubies.append(Cubie(-1, -1, 1, (color_x, color_y, color_z), "corner"))
+
+    color_y = color_function(f"faces/Orange/cside{2}.jpg")
+    color_z = color_function(f"faces/White/cside{8}.jpg")
+    cubies.append(Cubie(0, -1, 1, (None, color_y, color_z), "edge"))
+
+    color_x = color_function(f"faces/Green/cside{1}.jpg")
+    color_y = color_function(f"faces/Orange/cside{3}.jpg")
+    color_z = color_function(f"faces/White/cside{9}.jpg")
+    cubies.append(Cubie(1, -1, 1, (color_x, color_y, color_z), "corner"))
+
+    
+    # Center Cubies
+    color_x = color_function(f"faces/Green/cside{6}.jpg")
+    color_y = color_function(f"faces/Red/cside{4}.jpg")
+    cubies.append(Cubie(1, 1, 0, (color_x, color_y, None), "edge"))
+    
+    color_x = color_function(f"faces/Blue/cside{4}.jpg")
+    color_y = color_function(f"faces/Red/cside{6}.jpg")
+    cubies.append(Cubie(-1, 1, 0, (color_x, color_y, None), "edge"))
+
+    color_x = color_function(f"faces/Blue/cside{6}.jpg")
+    color_y = color_function(f"faces/Orange/cside{4}.jpg")
+    cubies.append(Cubie(-1, -1, 0, (color_x, color_y, None), "edge"))
+
+    color_x = color_function(f"faces/Green/cside{4}.jpg")
+    color_y = color_function(f"faces/Orange/cside{6}.jpg")
+    cubies.append(Cubie(1, -1, 0, (color_x, color_y, None), "edge"))
+
+
+    # Yellow Side Cubies
+
+    color_x = color_function(f"faces/Blue/cside{7}.jpg")
+    color_y = color_function(f"faces/Red/cside{9}.jpg")
+    color_z = color_function(f"faces/Yellow/cside{3}.jpg")
+    cubies.append(Cubie(-1, 1, -1, (color_x, color_y, color_z), "corner"))
+
+    color_y = color_function(f"faces/Red/cside{8}.jpg")
+    color_z = color_function(f"faces/Yellow/cside{2}.jpg")
+    cubies.append(Cubie(0, 1, -1, (None, color_y, color_z), "edge"))
+
+    color_x = color_function(f"faces/Green/cside{9}.jpg")
+    color_y = color_function(f"faces/Red/cside{7}.jpg")
+    color_z = color_function(f"faces/Yellow/cside{1}.jpg")
+    cubies.append(Cubie(1, 1, -1, (color_x, color_y, color_z), "corner"))
+
+    color_x = color_function(f"faces/Blue/cside{8}.jpg")
+    color_z = color_function(f"faces/Yellow/cside{6}.jpg")
+    cubies.append(Cubie(-1, 0, -1, (color_x, None, color_z), "edge"))
+
+
+    color_x = color_function(f"faces/Green/cside{8}.jpg")
+    color_z = color_function(f"faces/Yellow/cside{4}.jpg")
+    cubies.append(Cubie(1, 0, -1, (color_x, None, color_z), "edge"))
+
+    color_x = color_function(f"faces/Blue/cside{9}.jpg")
+    color_y = color_function(f"faces/Orange/cside{7}.jpg")
+    color_z = color_function(f"faces/Yellow/cside{9}.jpg")
+    cubies.append(Cubie(-1, -1, -1, (color_x, color_y, color_z), "corner"))
+
+    color_y = color_function(f"faces/Orange/cside{8}.jpg")
+    color_z = color_function(f"faces/Yellow/cside{8}.jpg")
+    cubies.append(Cubie(0, -1, -1, (None, color_y, color_z), "edge"))
+
+    color_x = color_function(f"faces/Green/cside{7}.jpg")
+    color_y = color_function(f"faces/Orange/cside{9}.jpg")
+    color_z = color_function(f"faces/Yellow/cside{7}.jpg")
+    cubies.append(Cubie(1, -1, -1, (color_x, color_y, color_z), "corner"))
+    
+
+    Rubiks = Cube(cubies)
+
+    for cubie in Rubiks.get_cubies():
+        print(cubie.position, cubie.colors)
+
+def color_tester_function():
+    for n in range(1, 10):
+        print(avg_color(f"cside{n}.jpg"))
 
 
 def main():
@@ -201,8 +307,9 @@ def main():
     convert_to_img()
     file_as_color()
     convert_to_np()
-    clean_directory()
-
+    #clean_directory()
+         
 
 if __name__ == "__main__":
     main()
+    # color_tester_function()

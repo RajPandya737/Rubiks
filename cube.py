@@ -17,24 +17,24 @@ white squares oin the z-axis, and green squares on the x-axis
      +------+
 
     - ---------- + This is the x-axis, right is positive, when a rotation is applied, the layer moves about the x-axis
+#   -1    0    1
 
-
-    +
+    +  1
     |
     |
-    |     This is the y-axis, up is positive, when a rotation is applied, the layer moves about the y-axis
+    |  0  This is the y-axis, up is positive, when a rotation is applied, the layer moves about the y-axis
     |
     |
-    |
+    |  -1
     -
 
-          -
+          -  -1
          /
         /
-       /      This is the z-azis, forward is positive, when a rotation is applied, the layer moves about the z-axis
+       /  0   This is the z-azis, forward is positive, when a rotation is applied, the layer moves about the z-axis
       /
      /
-    +
+    +  1
 
 """
 
@@ -115,13 +115,19 @@ class Cube:
     def get_cubies(self):
         return self.cubies
     
-    # def rotate_x(self, n, layer):
-    #     for cubie in self.cubies:
-    #         if cubie.position[1] == layer:
-    #             cubie.rotate_x(n)
+    def rotate_x(self, n, layer):
+        for cubie in self.cubies:
+            if cubie.position[0] == layer:
+                cubie.rotate_x(n)
     
-    # def rotate_y(self, n, layer):
-    #     for cubie in self.cubies:
-    #         cubie.rotate_y(n)
+    def rotate_y(self, n, layer):
+        for cubie in self.cubies:
+            if cubie.position[1] == layer:
+                cubie.rotate_y(n)
+    
+    def rotate_z(self, n, layer):
+        for cubie in self.cubies:
+            if cubie.position[2] == layer:
+                cubie.rotate_z(n)
 
 
