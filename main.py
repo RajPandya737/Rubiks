@@ -125,11 +125,11 @@ def real_color(avg):
     # and the shortform of the color (example Blue become b)
     colors_hash = {
         "White": (130, 148, 194),
-        "Red": (253, 147, 248),
-        "Blue": (110, 195, 254),
-        "Orange": (250, 96, 12),
-        "Green": (25, 155, 76),
-        "Yellow": (254, 213, 47),
+        "Red": (255, 80, 80), #works
+        "Blue": (60, 84, 161), #works
+        "Orange": (254, 160, 60), #works
+        "Green": (160, 220, 80), #works
+        "Yellow": (253, 245, 50), # works
     }
 
     color_to_abreviation = {
@@ -312,4 +312,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-    # color_tester_function()
+    #color_tester_function()
