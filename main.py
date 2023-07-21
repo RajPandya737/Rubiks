@@ -124,12 +124,12 @@ def real_color(avg):
     # the name of the color in full, how close it was, the average color of the image analyzed,
     # and the shortform of the color (example Blue become b)
     colors_hash = {
-        "White": (130, 148, 194),
-        "Red": (255, 80, 80), #works
-        "Blue": (60, 84, 161), #works
-        "Orange": (254, 160, 60), #works
-        "Green": (160, 220, 80), #works
-        "Yellow": (253, 245, 50), # works
+        "White": WHITE,
+        "Red": RED,
+        "Blue": BLUE, #works
+        "Orange": ORANGE, #works
+        "Green": GREEN, #works
+        "Yellow": YELLOW # works
     }
 
     color_to_abreviation = {
