@@ -290,11 +290,8 @@ def convert_to_np():
     color_z = color_function(f"faces/Yellow/cside{7}.jpg")
     cubies.append(Cubie(1, -1, -1, (color_x, color_y, color_z), "corner"))
     
+    return Cube(cubies)
 
-    Rubiks = Cube(cubies)
-
-    for cubie in Rubiks.get_cubies():
-        print(cubie.position, cubie.colors)
 
 def color_tester_function():
     for n in range(1, 10):
@@ -306,7 +303,8 @@ def main():
     get_cube()  # method to get the cubes photos and screenshots
     convert_to_img()
     file_as_color()
-    convert_to_np()
+    Cube = convert_to_np()
+    solution = Cube.solve_cube_str()
     #clean_directory()
          
 

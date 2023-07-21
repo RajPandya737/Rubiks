@@ -23,6 +23,5 @@ The project consists of the following files:
 As mentioned earlier, this project is still in development. Here are some potential improvements that may be implemented in the future:
 
 - Implement a more sophisticated image processing algorithm to improve cube detection and color recognition.
-- Develop an algorithm to solve the Rubik's Cube using the simulated arrays and rotations.
 - Create a graphical user interface (GUI) for a more user-friendly experience.
 - Optimize the code for better performance and efficiency.

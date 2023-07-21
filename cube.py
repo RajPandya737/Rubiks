@@ -115,76 +115,37 @@ class Cube:
 
         # Yellow face
 
-        to_return += self.get_cubies_by_position(-1, -1, -1).colors[2]
-        to_return += self.get_cubies_by_position(0, -1, -1).colors[2]
-        to_return += self.get_cubies_by_position(1, -1, -1).colors[2]
-        to_return += self.get_cubies_by_position(-1, 0, -1).colors[2]
-        to_return += self.get_cubies_by_position(0, 0, -1).colors[2]
-        to_return += self.get_cubies_by_position(1, 0, -1).colors[2]
-        to_return += self.get_cubies_by_position(-1, 1, -1).colors[2]
-        to_return += self.get_cubies_by_position(0, 1, -1).colors[2]
-        to_return += self.get_cubies_by_position(1, 1, -1).colors[2]
-
+        for i in range (-1, 2):
+            for j in range(-1,2):
+                to_return += self.get_cubies_by_position(j, i, -1).colors[2]
 
         # Blue Face Baby, yea yea aight
-
-        to_return += self.get_cubies_by_position(-1, -1, -1).colors[0]
-        to_return += self.get_cubies_by_position(-1, 0, -1).colors[0]
-        to_return += self.get_cubies_by_position(-1, 1, -1).colors[0]
-        to_return += self.get_cubies_by_position(-1, -1, 0).colors[0]
-        to_return += self.get_cubies_by_position(-1, 0, 0).colors[0]
-        to_return += self.get_cubies_by_position(-1, 1, 0).colors[0]
-        to_return += self.get_cubies_by_position(-1, -1, 1).colors[0]
-        to_return += self.get_cubies_by_position(-1, 0, 1).colors[0]
-        to_return += self.get_cubies_by_position(-1, 1, 1).colors[0]
+        for i in range (-1, 2):
+            for j in range(-1,2):
+                to_return += self.get_cubies_by_position(-1, j, i).colors[0]
 
         # Red Face
         
-        to_return += self.get_cubies_by_position(-1, 1, -1).colors[1]
-        to_return += self.get_cubies_by_position(0, 1, -1).colors[1]
-        to_return += self.get_cubies_by_position(1, 1, -1).colors[1]
-        to_return += self.get_cubies_by_position(-1, 1, 0).colors[1]
-        to_return += self.get_cubies_by_position(0, 1, 0).colors[1]
-        to_return += self.get_cubies_by_position(1, 1, 0).colors[1]
-        to_return += self.get_cubies_by_position(-1, 1, 1).colors[1]
-        to_return += self.get_cubies_by_position(0, 1, 1).colors[1]
-        to_return += self.get_cubies_by_position(1, 1, 1).colors[1]
+        for i in range (-1, 2):
+            for j in range(-1,2):
+                to_return += self.get_cubies_by_position(j, 1, i).colors[1]
 
         # Green Face
-        
-        to_return += self.get_cubies_by_position(1, 1, -1).colors[0]
-        to_return += self.get_cubies_by_position(1, 0, -1).colors[0]
-        to_return += self.get_cubies_by_position(1, -1, -1).colors[0]
-        to_return += self.get_cubies_by_position(1, 1, 0).colors[0]
-        to_return += self.get_cubies_by_position(1, 0, 0).colors[0]
-        to_return += self.get_cubies_by_position(1, -1, 0).colors[0]
-        to_return += self.get_cubies_by_position(1, 1, 1).colors[0]
-        to_return += self.get_cubies_by_position(1, 0, 1).colors[0]
-        to_return += self.get_cubies_by_position(1, -1, 1).colors[0]
+
+        for i in range (-1, 2):
+            for j in range(-1,2):
+                to_return += self.get_cubies_by_position(1, -j, i).colors[0]
 
         # Orange Face
-
-        to_return += self.get_cubies_by_position(1, -1, -1).colors[1]
-        to_return += self.get_cubies_by_position(0, -1, -1).colors[1]
-        to_return += self.get_cubies_by_position(-1, -1, -1).colors[1]
-        to_return += self.get_cubies_by_position(1, -1, 0).colors[1]
-        to_return += self.get_cubies_by_position(0, -1, 0).colors[1]
-        to_return += self.get_cubies_by_position(-1, -1, 0).colors[1]
-        to_return += self.get_cubies_by_position(1, -1, 1).colors[1]
-        to_return += self.get_cubies_by_position(0, -1, 1).colors[1]
-        to_return += self.get_cubies_by_position(-1, -1, 1).colors[1]
+        for i in range (-1, 2):
+            for j in range(-1,2):
+                to_return += self.get_cubies_by_position(-j, -1, i).colors[1]
 
         # White Face
 
-        to_return += self.get_cubies_by_position(-1, 1, 1).colors[2]
-        to_return += self.get_cubies_by_position(0, 1, 1).colors[2]
-        to_return += self.get_cubies_by_position(1, 1, 1).colors[2]
-        to_return += self.get_cubies_by_position(-1, 0, 1).colors[2]
-        to_return += self.get_cubies_by_position(0, 0, 1).colors[2]
-        to_return += self.get_cubies_by_position(1, 0, 1).colors[2]
-        to_return += self.get_cubies_by_position(-1, -1, 1).colors[2]
-        to_return += self.get_cubies_by_position(0, -1, 1).colors[2]
-        to_return += self.get_cubies_by_position(1, -1, 1).colors[2]
+        for i in range (-1, 2):
+            for j in range(-1,2):
+                to_return += self.get_cubies_by_position(j, -i, 1).colors[2]
         
         return to_return
     
@@ -218,7 +179,7 @@ class Cube:
             if cubie.position[2] == layer:
                 cubie.rotate_z(n)
 
-    def solve_cube(self):
+    def solve_cube_str(self):
         str_rep = self.__str__()
         return utils.solve(str_rep, 'Kociemba')
 
