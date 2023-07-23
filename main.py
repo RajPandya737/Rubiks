@@ -9,10 +9,17 @@ from colormath.color_conversions import convert_color
 from color_diff import *
 import shutil
 from cube import *
+import matplotlib.pyplot as plt
+from matplot_img import Img_MPL
+import sys
+
+def show_directions():
+    img = Img_MPL("tutorial_images/instructions.png", "Tutorial")
+    img.show_img()
 
 # When showing the cube to the camera, prioritize the white center on top, but if you are showing white or yellow, red should be on top
 def get_cube():
-    # gloablish variables
+
     webcam = cv2.VideoCapture(0)  # Default camera on your system
     side = 1  # Pics taken so far // increments by 1 every time photo taken
 
@@ -60,12 +67,16 @@ def get_cube():
 
 
 def convert_to_img():
-    # We do a bit of cropping around here
-    for n in range(1, 7):
-        image = Image.open(f"sides/side{n}.jpg")
-        cropped_image = image.crop((LEFT, TOP, RIGHT, BOTTOM))
-        cropped_image.save(f"cropped_sides/cside{n}.jpg")
-        delete_img(f"sides/side{n}.jpg")
+    try:
+        # We do a bit of cropping around here
+        for n in range(1, 7):
+            image = Image.open(f"sides/side{n}.jpg")
+            cropped_image = image.crop((LEFT, TOP, RIGHT, BOTTOM))
+            cropped_image.save(f"cropped_sides/cside{n}.jpg")
+            delete_img(f"sides/side{n}.jpg")
+    except FileNotFoundError:
+        print("The file was not found")
+        sys.exit()
 
 
 def delete_img(path):
@@ -300,11 +311,13 @@ def color_tester_function():
 
 def main():
     clean_directory()
+    show_directions()
     get_cube()  # method to get the cubes photos and screenshots
     convert_to_img()
     file_as_color()
     Cube = convert_to_np()
     solution = Cube.solve_cube_str()
+    print(solution)
     #clean_directory()
          
 
