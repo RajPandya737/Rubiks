@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 
 class Img_MPL:
     def __init__(self, path, title):
-        #"tutorial_images/instructions.png"
         self.image = Image.open(path)
         self.title = title
 

@@ -8,7 +8,7 @@ The project utilizes the following libraries:
 - NumPy: Utilized to simulate the Rubik's Cube as multidimensional arrays and perform matrix operations.
 - Pillow: Used for image manipulation and processing.
 - ColorMath: Utilized for color analysis and detection.
-- Matplotlib : Used to show images
+- Matplotlib : Used to show images, render the cube, and display the final algorithm to perform
 
 ## Project Structure
 The project consists of the following files:
@@ -18,7 +18,8 @@ The project consists of the following files:
 3. `config.py`:File containing all constants used in the program.
 4. `color_diff.py`: A file containing color math operations.
 5. `matplot_img.py`: A file containing the Img_MPL class.
-6. `README.md`: This file, providing an overview of the project.
+6. `cubie_render_test.py`: A file containing test code on rendering a Rubiks cube in MPL
+7. `README.md`: This file, providing an overview of the project.
 
 
 ## Future Development

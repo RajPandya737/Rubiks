@@ -11,6 +11,7 @@ import shutil
 from cube import *
 import matplotlib.pyplot as plt
 from matplot_img import Img_MPL
+from mpl_toolkits.mplot3d import Axes3D
 import sys
 
 def show_directions():
@@ -307,7 +308,7 @@ def convert_to_np():
 def color_tester_function():
     for n in range(1, 10):
         print(avg_color(f"cside{n}.jpg"))
-
+        
 
 def main():
     clean_directory()
@@ -315,10 +316,15 @@ def main():
     get_cube()  # method to get the cubes photos and screenshots
     convert_to_img()
     file_as_color()
-    Cube = convert_to_np()
-    solution = Cube.solve_cube_str()
-    print(solution)
-    #clean_directory()
+    try:
+        Cube = convert_to_np()
+        print(Cube.__str__())
+        solution = Cube.solve_cube_str()
+        print(solution)
+    except:
+        print("Error: Camera quality was too low, the colors could not be picked up, or cube is not solvable")
+    
+    clean_directory()
          
 
 if __name__ == "__main__":
