@@ -13,6 +13,7 @@ import matplotlib.pyplot as plt
 from matplot_img import Img_MPL
 from mpl_toolkits.mplot3d import Axes3D
 import sys
+from cube_renderer import Cube_MPL
 
 def show_directions():
     img = Img_MPL("tutorial_images/instructions.png", "Tutorial")
@@ -316,13 +317,14 @@ def main():
     get_cube()  # method to get the cubes photos and screenshots
     convert_to_img()
     file_as_color()
-    #try:
-    Cube = convert_to_np()
-    print(Cube.__str__())
-    solution = Cube.solve_cube_str()
-    print(solution)
-    #except:
-    print("Error: Camera quality was too low, the colors could not be picked up, or cube is not solvable")
+    try:
+        Cube = convert_to_np()
+        #print(Cube.__str__())
+        #print(solution)
+        cube_simulation = Cube_MPL(Cube.__str__(), Cube.solve_cube_str())
+        cube_simulation.render()
+    except:
+        print("Error: Camera quality was too low, the colors could not be picked up, or cube is not solvable")
     
     #clean_directory()
          

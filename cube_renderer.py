@@ -1,17 +1,25 @@
- 
-
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
-test = 'ryyyyyobyyogobobggwrggrowbrogbbggwwbrrgwowwwyrybrwboro'
+import collections
+collections.Iterable = collections.abc.Iterable
+collections.Mapping = collections.abc.Mapping
+collections.MutableSet = collections.abc.MutableSet
+collections.MutableMapping = collections.abc.MutableMapping
+from rubik_solver import utils
+
 
 class Cube_MPL:
-    def __init__ (self, cube_string):
+    def __init__ (self, cube_string, solution=''):
         self.s = cube_string
+        self.solution = 'Solution: ' + '-'.join(list(map(str, solution))) 
+
+    def render(self):
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
         vertices, faces = self.reset_verticies_and_faces()
-    
+        ax.set_title(self.solution, fontsize=10)
+        plt.suptitle("This should be your cube, follow the algorithm with red facing you and yellow facing up", fontsize=10)
 
         self.graph_setup(self.set_colors(), vertices, faces, ax)
 
@@ -51,7 +59,6 @@ class Cube_MPL:
                         cube_num += 1
                     except:
                         pass
-
         plt.show()
 
 
@@ -114,4 +121,7 @@ class Cube_MPL:
     ]
         return vertices, faces
 
-c = Cube_MPL('ryyyyyobyyogobobggwrggrowbrogbbggwwbrrgwowwwyrybrwboro')
+
+# s = 'ryyyyyobyyogobobggwrggrowbrogbbggwwbrrgwowwwyrybrwboro'
+# c = Cube_MPL(s, utils.solve(s, 'Kociemba'))
+# c.render()
