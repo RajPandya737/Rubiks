@@ -21,7 +21,7 @@ git clone https://github.com/RajPandya737/Rubiks-Cube-Solver.git
 ```
 2. Change to the project directory:
 ```bash
-cd cd Rubiks-Cube-Solver
+cd Rubiks-Cube-Solver
 ```
 
 3. The project utilizes many libraries such as openCV, numpy, pillow, colormath, matplotlib, and many more. Ensure you have all of them downloaded by running

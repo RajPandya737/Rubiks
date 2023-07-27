@@ -399,7 +399,7 @@ def load_colors():
     YELLOW = color_data["YELLOW"]
 
 def create_missing_folders():
-    required_folders = ["centers", "cropped_centers", "cropped_sides", "faces", "sides", "squares"]
+    required_folders = ["centers", "cropped_centers", "cropped_sides", "faces", "sides", "squares", "faces/Blue", "faces/Green", "faces/Orange", "faces/Red", "faces/White", "faces/Yellow"]
 
     for folder in required_folders:
         if not os.path.exists(folder):
