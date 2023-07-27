@@ -11,7 +11,7 @@ The project utilizes the following libraries:
 - Matplotlib : Used to show images, render the cube, and display the final algorithm to perform
 
 ## Project Structure
-The project consists of the following files inside of the RubiksCube folder:
+The project consists of the following files:
 
 1. `main.py`: The main Python script.
 2. `cube.py`: The file containing the Rubiks cube class and the Cubie class.
