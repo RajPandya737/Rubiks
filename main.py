@@ -382,8 +382,11 @@ def main():
     answer = input("Welcome to the Rubik's Cube Solver!, would you like to calibrate the colors? (y/n)\n")
     if answer == "y":
         calibrate()
+        print(WHITE, RED, BLUE, ORANGE, GREEN, YELLOW)
+    #WHITE, RED, BLUE, ORANGE, GREEN, YELLOW = (125, 142, 201), (169, 75, 119), (55, 67, 200), (250, 113, 65), (73, 163, 78), (174, 218, 113)
     clean_directory()
     show_directions()
+    print("Time to scan the cube!")
     get_cube()  # method to get the cubes photos and screenshots
     convert_to_img()
     file_as_color()

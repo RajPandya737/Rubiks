@@ -73,7 +73,7 @@ class Cube_MPL:
             [self.s[6], self.s[6], self.s[18], self.s[18],  self.s[11], self.s[11]],
             [self.s[7], self.s[7], self.s[19], self.s[19],  'black', 'black'],
             [self.s[8], self.s[8], self.s[20], self.s[20],  self.s[27], self.s[27]],
-            ['black', 'black', self.s[41], self.s[41], self.s[10], self.s[10]],
+            ['black', 'black', self.s[41], self.s[41], self.s[12], self.s[12]],
             ['black', 'black', self.s[40], self.s[40], 'black', 'black'],
             ['black', 'black', self.s[39], self.s[39], self.s[32], self.s[32]],
             ['black', 'black', 'black', 'black', self.s[13], self.s[13]],
@@ -88,7 +88,7 @@ class Cube_MPL:
             [self.s[48], self.s[48], 'black', 'black', self.s[12], self.s[12]],
             [self.s[49], self.s[49], 'black', 'black', 'black', 'black'],
             [self.s[50], self.s[50], 'black', 'black', self.s[34], self.s[34]],
-            [self.s[45], self.s[45], self.s[24], self.s[24], self.s[16], self.s[16]],
+            [self.s[45], self.s[45], self.s[24], self.s[24], self.s[17], self.s[17]],
             [self.s[46], self.s[46], self.s[25], self.s[25], 'black', 'black'],
             [self.s[47], self.s[47], self.s[26], self.s[26], self.s[33], self.s[33]]
         ]
@@ -122,6 +122,6 @@ class Cube_MPL:
         return vertices, faces
 
 
-# s = 'ryyyyyobyyogobobggwrggrowbrogbbggwwbrrgwowwwyrybrwboro'
+# s = 'gyyyywoywrbbgbbygwyrorroowbgrgbggrwrooyyowggbbowrwbrow'
 # c = Cube_MPL(s, utils.solve(s, 'Kociemba'))
 # c.render()
