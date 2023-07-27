@@ -58,6 +58,8 @@ def get_cube():
                 side += 1
 
             if side == 7:  # End when the all sides photos have been taken
+                webcam.release()
+                cv2.destroyAllWindows()
                 break
 
         # Wait for the 'q' key to be pressed to exit the loop
@@ -343,6 +345,8 @@ def calibrate_colors():
                     print(f"Press display the {side_hash[side]} side and press the space bar to capture it")
 
             if side == 7:  # End when the all sides photos have been taken
+                webcam.release()
+                cv2.destroyAllWindows()
                 break
 
         # Wait for the 'q' key to be pressed to exit the loop
@@ -400,7 +404,7 @@ def main():
     answer = input("Welcome to the Rubik's Cube Solver!, would you like to calibrate the colors? (y/n)\n")
     if answer == "y":
         calibrate()
-        print(WHITE, RED, BLUE, ORANGE, GREEN, YELLOW)
+        #print(WHITE, RED, BLUE, ORANGE, GREEN, YELLOW)
     #WHITE, RED, BLUE, ORANGE, GREEN, YELLOW = (125, 142, 201), (169, 75, 119), (55, 67, 200), (250, 113, 65), (73, 163, 78), (174, 218, 113)
     load_colors()
     clean_directory()
