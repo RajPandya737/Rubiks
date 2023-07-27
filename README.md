@@ -9,6 +9,8 @@ This Python project aims to solve a Rubik's Cube using computer vision technique
 **Note: the cube scans all faces and then plots them on the cube in the simulation
 
 
+
+
 ## Installation
 
 To use the Rubik's Cube Solver, follow these steps to set up the project:
@@ -19,7 +21,7 @@ git clone https://github.com/RajPandya737/Rubiks-Cube-Solver.git
 ```
 2. Change to the project directory:
 ```bash
-cd RubiksCube
+cd cd Rubiks-Cube-Solver
 ```
 
 3. The project utilizes many libraries such as openCV, numpy, pillow, colormath, matplotlib, and many more. Ensure you have all of them downloaded by running

@@ -16,7 +16,7 @@ class Cube_MPL:
         self.solution = 'Solution: ' + '-'.join(list(map(str, Cube.solve_cube_str()))) 
 
     def render(self):
-        fig = plt.figure()
+        fig = plt.figure("Your Rubik's Cube")
         ax = fig.add_subplot(111, projection='3d')
         vertices, faces = self.reset_verticies_and_faces()
         ax.set_title(self.solution, fontsize=10)

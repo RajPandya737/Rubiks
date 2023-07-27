@@ -21,7 +21,7 @@ def show_directions():
     img.show_img()
 
 # When showing the cube to the camera, prioritize the white center on top, but if you are showing white or yellow, red should be on top
-def get_cube(webcam):
+def get_cube():
 
     webcam = cv2.VideoCapture(0)  # Default camera on your system
     side = 1  # Pics taken so far // increments by 1 every time photo taken
@@ -31,7 +31,7 @@ def get_cube(webcam):
         print("Failed to open the camera")
         exit()
 
-    cv2.namedWindow("Camera Feed")  # Create a window to display the camera feed
+    #cv2.namedWindow("Camera Feed")  # Create a window to display the camera feed
 
     while True:
         ret, frame = webcam.read()  # Gets the frame
