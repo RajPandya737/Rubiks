@@ -15,6 +15,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import sys
 from cube_renderer import Cube_MPL
 import json
+import easygui as eg
 
 def show_directions():
     img = Img_MPL("images/instructions.png", "Tutorial")
@@ -405,13 +406,17 @@ def create_missing_folders():
         if not os.path.exists(folder):
             os.makedirs(folder)
 
+def ask_calibration():
+    welcome_message = "Welcome to the Rubik's Cube Solver!"
+    choices = ["Yes", "No"]
+    response = eg.buttonbox(welcome_message + "\nWould you like to calibrate the colors?", choices=choices)
+    return response
+
 def main():
     create_missing_folders()
-    answer = input("Welcome to the Rubik's Cube Solver!, would you like to calibrate the colors? (y/n)\n")
-    if answer == "y":
+    answer = ask_calibration()
+    if answer == "Yes":
         calibrate()
-        #print(WHITE, RED, BLUE, ORANGE, GREEN, YELLOW)
-    #WHITE, RED, BLUE, ORANGE, GREEN, YELLOW = (125, 142, 201), (169, 75, 119), (55, 67, 200), (250, 113, 65), (73, 163, 78), (174, 218, 113)
     load_colors()
     clean_directory()
     show_directions()
