@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
-
 import collections
 collections.Iterable = collections.abc.Iterable
 collections.Mapping = collections.abc.Mapping
@@ -16,6 +15,7 @@ class Cube_MPL:
         self.solution = 'Solution: ' + '-'.join(list(map(str, Cube.solve_cube_str()))) 
 
     def render(self):
+        # Gets ready to plot the cube by adding the plot and all the smaller cubies
         fig = plt.figure("Your Rubik's Cube")
         ax = fig.add_subplot(111, projection='3d')
         vertices, faces = self.reset_verticies_and_faces()
@@ -26,6 +26,8 @@ class Cube_MPL:
 
     
     def graph_setup(self, colors, vertices, faces, ax):
+        
+        #puts the cubes where they need to go on the x,y,z plane
         cubes = []
         for i, _ in enumerate(colors):
             cube = Poly3DCollection(faces, facecolors=colors[i], linewidths=1, edgecolors='black', alpha=0.99)
@@ -64,6 +66,7 @@ class Cube_MPL:
 
 
     def set_colors(self):
+        # This order of the colors will always be the same when you get it from the Cube.__str__() method
         colors = [
             [self.s[0], self.s[0], self.s[38], self.s[38], self.s[9], self.s[9]], 
             [self.s[1], self.s[1], self.s[37], self.s[37], 'black', 'black'],
@@ -94,6 +97,8 @@ class Cube_MPL:
             [self.s[47], self.s[47], self.s[26], self.s[26], self.s[33], self.s[33]]
         ]
 
+        #returns the colors in the correct format for the Poly3DCollection
+
         color_hash = {'r': 'red', 'y': 'yellow', 'b': 'blue', 'g': 'green', 'o': 'orange', 'w': 'white', 'black': 'black'}
 
         for i_1, color_set in enumerate(colors):
@@ -102,6 +107,7 @@ class Cube_MPL:
         return colors
 
     def reset_verticies_and_faces(self):
+        # Everytime a cubie is put in its place, you have to reset these values
         vertices = [
             [0, 0, 0],
             [1, 0, 0],
@@ -121,8 +127,3 @@ class Cube_MPL:
         [vertices[1], vertices[2], vertices[6], vertices[5]]   # Right face
     ]
         return vertices, faces
-
-
-# s = 'gyyyywoywrbbgbbygwyrorroowbgrgbggrwrooyyowggbbowrwbrow'
-# c = Cube_MPL(s, utils.solve(s, 'Kociemba'))
-# c.render()

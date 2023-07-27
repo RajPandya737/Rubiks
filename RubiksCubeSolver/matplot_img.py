@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 
 class Img_MPL:
     def __init__(self, path, title):
+        # Gets the image and the title, and when you want to show it, it displays on an MPL plot
         self.image = Image.open(path)
         self.title = title
 

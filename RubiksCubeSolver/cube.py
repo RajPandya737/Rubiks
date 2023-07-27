@@ -41,7 +41,7 @@ white squares oin the z-axis, and green squares on the x-axis
 import numpy as np
 from math import sin, cos, pi
 import collections.abc
-#hyper needs the four following aliases to be done manually.
+#rubik_solver needs the four following aliases to be done manually.
 collections.Iterable = collections.abc.Iterable
 collections.Mapping = collections.abc.Mapping
 collections.MutableSet = collections.abc.MutableSet
@@ -50,15 +50,13 @@ from rubik_solver import utils
 
 
 def rotation_matrix(axis, n):
-    
+    # Multiply this by the position vector of the cubie to get the new position vector
     n = n%4
     sin_hash = {90: 1, 180: 0, 270:-1, 360:0}
     cos_hash = {90: 0, 180: -1, 270:0, 360:1}
     angle_sin = sin_hash[90*n]
     angle_cos = cos_hash[90*n]
 
-    # angle_sin = sin(n*pi/2)
-    # angle_cos = cos(n*pi/2)
     if axis == "x":
         return np.array([[1,0,0], [0,angle_cos,-1*angle_sin], [0, angle_sin, angle_cos]])
     elif axis == "y":
@@ -180,7 +178,6 @@ class Cube:
                 cubie.rotate_z(n)
 
     def solve_cube_str(self):
+        # Solves the cube using the Kociemba algorithm
         str_rep = self.__str__()
         return utils.solve(str_rep, 'Kociemba')
-
-# print(utils.solve('ywgryogyrbgwbbbrrroryyrrwyobgybgwboorgoboogowbgwwwygwy', 'Kociemba'))

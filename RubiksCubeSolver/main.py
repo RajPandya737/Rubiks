@@ -32,8 +32,6 @@ def get_cube():
         print("Failed to open the camera")
         exit()
 
-    #cv2.namedWindow("Camera Feed")  # Create a window to display the camera feed
-
     while True:
         ret, frame = webcam.read()  # Gets the frame
 
@@ -187,6 +185,7 @@ def real_color(avg):
 
 
 def file_as_color():
+    # Depending on the middle color of the square, it is put in the right file
     for side in range(1, 7):
         squarify(side)
         side_color = real_color(avg_color(f"squares/cside{5}.jpg"))[1]
@@ -200,7 +199,7 @@ def convert_to_np():
     # We can start to build the cube from the yellow and white sides, these will always be opposite from each
     # other so if we create every other piece relative to these 2, everything should fit nicely (hopefully)
 
-    #All the centers are already in the cubies list
+    # All the centers are already in the cubies list
     cubies = [
         Cubie(0, 0, 1, (None, None, "w"), "center"),
         Cubie(0, 0, -1, (None, None, "y"), "center"),
@@ -311,6 +310,7 @@ def convert_to_np():
 
 
 def color_tester_function():
+    # Used to test the color of a collection of images, not used in the actual program
     for n in range(1, 10):
         print(avg_color(f"cside{n}.jpg"))
 
@@ -327,9 +327,8 @@ def calibrate_colors():
         print("Failed to open the camera")
         exit()
 
-    cv2.namedWindow("Camera Feed")  # Create a window to display the camera feed
+    cv2.namedWindow("Only display the center square of the asked color")  # Create a window to display the camera feed
     print(f"Press display the {side_hash[side]} side and press the space bar to capture it")
-    is_open = True
     while True:
         ret, frame = webcam.read()  # Gets the frame
 
@@ -344,7 +343,7 @@ def calibrate_colors():
                 print("Photo captured!")
                 side += 1
                 if side != 7:
-                    print(f"Press display the {side_hash[side]} side and press the space bar to capture it")
+                    print(f"Display the {side_hash[side]} side")
 
             if side == 7:  # End when the all sides photos have been taken
                 webcam.release()
@@ -360,20 +359,15 @@ def calibrate_colors():
     cv2.destroyAllWindows()
 
 def crop_centers():
+    # Used for the calibration function to get only the center square of the photo
     for n in range(1, 7):
         image = Image.open(f"centers/side{n}.jpg")
         cropped_image = image.crop((LEFT + SPACING//4, TOP + SPACING//4, LEFT+ 3*SPACING//4, TOP+ 3*SPACING//4))
         cropped_image.save(f"cropped_centers/cside{n}.jpg")
         delete_img(f"centers/side{n}.jpg")
 
-def calibrate():
-    print("Show the camera the center of the desired color, then press the space bar to take a photo.")
-    calibrate_colors()
-    crop_centers()
-    center_colors()
-
-
 def center_colors():
+    # Sets all the colors used in the program based on the image taken
     color_data = {"WHITE" : avg_color(f"cropped_centers/cside1.jpg"),
                   "RED" : avg_color(f"cropped_centers/cside2.jpg"),
                   "BLUE" : avg_color(f"cropped_centers/cside3.jpg"),
@@ -386,8 +380,15 @@ def center_colors():
         json.dump(color_data, file, indent=2)
 
 
+def calibrate():
+    print("Show the camera the center of the desired color, then press the space bar to take a photo.")
+    calibrate_colors()
+    crop_centers()
+    center_colors()
+
 
 def load_colors():
+    # Loads the colors from the json file and sets them across the program
     global YELLOW, BLUE, GREEN, WHITE, RED, ORANGE
     with open("colors.json", "r") as file:
         color_data = json.load(file)
@@ -400,6 +401,7 @@ def load_colors():
     YELLOW = color_data["YELLOW"]
 
 def create_missing_folders():
+    # From the github, some folders do not appear, this is to ensure they are present in the program
     required_folders = ["centers", "cropped_centers", "cropped_sides", "faces", "sides", "squares", "faces/Blue", "faces/Green", "faces/Orange", "faces/Red", "faces/White", "faces/Yellow"]
 
     for folder in required_folders:
@@ -407,6 +409,7 @@ def create_missing_folders():
             os.makedirs(folder)
 
 def ask_calibration():
+    # Asks the user if they want to calibrate the colors
     welcome_message = "Welcome to the Rubik's Cube Solver!"
     choices = ["Yes", "No"]
     response = eg.buttonbox(welcome_message + "\nWould you like to calibrate the colors?", choices=choices)
@@ -426,18 +429,13 @@ def main():
     file_as_color()
     try:
         Cube = convert_to_np()
-        #print(Cube.__str__())
-        #print(solution)
         cube_simulation = Cube_MPL(Cube)
         cube_simulation.render()
     except:
         print("Error: Camera quality was too low, the colors could not be picked up, or cube is not solvable")
-    
-    #clean_directory()
+    clean_directory()
          
 
 if __name__ == "__main__":
     main()
-    #color_tester_function()
-    clean_directory()
 
