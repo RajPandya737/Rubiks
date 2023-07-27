@@ -20,7 +20,7 @@ class Cube_MPL:
         ax = fig.add_subplot(111, projection='3d')
         vertices, faces = self.reset_verticies_and_faces()
         ax.set_title(self.solution, fontsize=10)
-        plt.suptitle("This should be your cube, follow the algorithm with red facing you and yellow facing up", fontsize=10)
+        plt.suptitle("Follow the algorithm with red facing you and yellow facing up", fontsize=10)
 
         self.graph_setup(self.set_colors(), vertices, faces, ax)
 
