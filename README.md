@@ -19,7 +19,8 @@ The project consists of the following files:
 4. `color_diff.py`: A file containing color math operations.
 5. `matplot_img.py`: A file containing the Img_MPL class.
 6. `cube_renderer.py`: A file containing the class that renders the cube in MPL
-7. `README.md`: This file, providing an overview of the project.
+7. `colors.json.py`: JSON file to store user color data
+8. `README.md`: This file, providing an overview of the project.
 
 
 ## Future Development

@@ -1,3 +1,5 @@
+import json
+
 # Color of the webcam box // Black 
 BOX_COLOR = (0,0,0)
 
@@ -14,9 +16,12 @@ SPACING = (RIGHT - LEFT) // 3
 BORDER_THICKNESS = 2
 
 # Colors
-WHITE = (130, 148, 194)
-RED = (255, 80, 80)
-BLUE = (60, 84, 161)
-ORANGE = (240, 98, 59)
-GREEN = (84, 146, 64)
-YELLOW = (150, 154, 46)
+with open('colors.json', 'r') as file:
+    color_data = json.load(file)
+
+WHITE = color_data["WHITE"]
+RED = color_data["RED"]
+BLUE = color_data["BLUE"]
+ORANGE = color_data["ORANGE"]
+GREEN = color_data["GREEN"]
+YELLOW = color_data["YELLOW"]

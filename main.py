@@ -14,6 +14,7 @@ from matplot_img import Img_MPL
 from mpl_toolkits.mplot3d import Axes3D
 import sys
 from cube_renderer import Cube_MPL
+import json
 
 def show_directions():
     img = Img_MPL("tutorial_images/instructions.png", "Tutorial")
@@ -367,13 +368,30 @@ def calibrate():
 
 
 def center_colors():
+    color_data = {"WHITE" : avg_color(f"cropped_centers/cside1.jpg"),
+                  "RED" : avg_color(f"cropped_centers/cside2.jpg"),
+                  "BLUE" : avg_color(f"cropped_centers/cside3.jpg"),
+                "ORANGE" : avg_color(f"cropped_centers/cside4.jpg"),
+                "GREEN" : avg_color(f"cropped_centers/cside5.jpg"),
+                "YELLOW" : avg_color(f"cropped_centers/cside6.jpg")
+    }
+
+    with open("colors.json", "w") as file:
+        json.dump(color_data, file, indent=2)
+
+
+
+def load_colors():
     global YELLOW, BLUE, GREEN, WHITE, RED, ORANGE
-    WHITE = avg_color(f"cropped_centers/cside1.jpg")
-    RED = avg_color(f"cropped_centers/cside2.jpg")
-    BLUE = avg_color(f"cropped_centers/cside3.jpg")
-    ORANGE = avg_color(f"cropped_centers/cside4.jpg")
-    GREEN = avg_color(f"cropped_centers/cside5.jpg")
-    YELLOW =avg_color(f"cropped_centers/cside6.jpg")
+    with open("colors.json", "r") as file:
+        color_data = json.load(file)
+
+    WHITE = color_data["WHITE"]
+    RED = color_data["RED"]
+    BLUE = color_data["BLUE"]
+    ORANGE = color_data["ORANGE"]
+    GREEN = color_data["GREEN"]
+    YELLOW = color_data["YELLOW"]
 
 
 
@@ -384,6 +402,7 @@ def main():
         calibrate()
         print(WHITE, RED, BLUE, ORANGE, GREEN, YELLOW)
     #WHITE, RED, BLUE, ORANGE, GREEN, YELLOW = (125, 142, 201), (169, 75, 119), (55, 67, 200), (250, 113, 65), (73, 163, 78), (174, 218, 113)
+    load_colors()
     clean_directory()
     show_directions()
     print("Time to scan the cube!")
@@ -394,7 +413,7 @@ def main():
         Cube = convert_to_np()
         #print(Cube.__str__())
         #print(solution)
-        cube_simulation = Cube_MPL(Cube.__str__(), Cube.solve_cube_str())
+        cube_simulation = Cube_MPL(Cube)
         cube_simulation.render()
     except:
         print("Error: Camera quality was too low, the colors could not be picked up, or cube is not solvable")
@@ -403,7 +422,7 @@ def main():
          
 
 if __name__ == "__main__":
-    main()
+    #main()
     #color_tester_function()
-    #clean_directory()
+    clean_directory()
 

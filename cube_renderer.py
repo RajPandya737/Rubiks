@@ -7,12 +7,13 @@ collections.Mapping = collections.abc.Mapping
 collections.MutableSet = collections.abc.MutableSet
 collections.MutableMapping = collections.abc.MutableMapping
 from rubik_solver import utils
+from cube import Cube
 
 
 class Cube_MPL:
-    def __init__ (self, cube_string, solution=''):
-        self.s = cube_string
-        self.solution = 'Solution: ' + '-'.join(list(map(str, solution))) 
+    def __init__ (self, Cube):
+        self.s = Cube.__str__()
+        self.solution = 'Solution: ' + '-'.join(list(map(str, Cube.solve_cube_str()))) 
 
     def render(self):
         fig = plt.figure()
@@ -85,7 +86,7 @@ class Cube_MPL:
             [self.s[51], self.s[51], self.s[44], self.s[44], self.s[15], self.s[15]],
             [self.s[52], self.s[52], self.s[43], self.s[43], 'black', 'black'],
             [self.s[53], self.s[53], self.s[42], self.s[42], self.s[35], self.s[35]],
-            [self.s[48], self.s[48], 'black', 'black', self.s[12], self.s[12]],
+            [self.s[48], self.s[48], 'black', 'black', self.s[16], self.s[16]],
             [self.s[49], self.s[49], 'black', 'black', 'black', 'black'],
             [self.s[50], self.s[50], 'black', 'black', self.s[34], self.s[34]],
             [self.s[45], self.s[45], self.s[24], self.s[24], self.s[17], self.s[17]],
