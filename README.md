@@ -15,10 +15,10 @@ The project consists of the following files:
 
 1. `main.py`: The main Python script.
 2. `cube.py`: The file containing the Rubiks cube class and the Cubie class.
-3. `config.py`:File containing all constants used in the program.
+3. `config.py`:A file containing all constants used in the program.
 4. `color_diff.py`: A file containing color math operations.
 5. `matplot_img.py`: A file containing the Img_MPL class.
-6. `cubie_render_test.py`: A file containing test code on rendering a Rubiks cube in MPL
+6. `cube_renderer.py`: A file containing the class that renders the cube in MPL
 7. `README.md`: This file, providing an overview of the project.
 
 
@@ -26,6 +26,6 @@ The project consists of the following files:
 As mentioned earlier, this project is still in development. Here are some potential improvements that may be implemented in the future:
 
 - Implement a more sophisticated image processing algorithm to improve cube detection and color recognition.
-- Create a graphical user interface (GUI) for a more user-friendly experience.
+- Develop a graphical user interface (GUI) for a more user-friendly experience.
 - Optimize the code for better performance and efficiency.
 

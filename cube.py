@@ -183,4 +183,4 @@ class Cube:
         str_rep = self.__str__()
         return utils.solve(str_rep, 'Kociemba')
 
-print(utils.solve('ywgryogyrbgwbbbrrroryyrrwyobgybgwboorgoboogowbgwwwygwy', 'Kociemba'))
+# print(utils.solve('ywgryogyrbgwbbbrrroryyrrwyobgybgwboorgoboogowbgwwwygwy', 'Kociemba'))

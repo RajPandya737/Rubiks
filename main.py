@@ -48,7 +48,7 @@ def get_cube():
                         BORDER_THICKNESS,
                     )
 
-            cv2.imshow("Camera Feed", frame)  # Display
+            cv2.imshow("Camera Feed Full Cube", frame)  # Display
 
             # If space bar is pressed, takes a photo, this method can be found in 'capture.py'
             if cv2.waitKey(1) & 0xFF == ord(" "):
@@ -139,10 +139,10 @@ def real_color(avg):
     colors_hash = {
         "White": WHITE,
         "Red": RED,
-        "Blue": BLUE, #works
-        "Orange": ORANGE, #works
-        "Green": GREEN, #works
-        "Yellow": YELLOW # works
+        "Blue": BLUE, 
+        "Orange": ORANGE, 
+        "Green": GREEN, 
+        "Yellow": YELLOW 
     }
 
     color_to_abreviation = {
@@ -309,9 +309,79 @@ def convert_to_np():
 def color_tester_function():
     for n in range(1, 10):
         print(avg_color(f"cside{n}.jpg"))
-        
+
+
+
+def calibrate_colors():
+    webcam = cv2.VideoCapture(0)  # Default camera on your system
+    side = 1  # Pics taken so far // increments by 1 every time photo taken
+
+    side_hash = {1: "White", 2: "Red", 3: "Blue", 4: "Orange", 5: "Green", 6: "Yellow"}
+    # Check if opened correctly
+    if not webcam.isOpened():
+        print("Failed to open the camera")
+        exit()
+
+    cv2.namedWindow("Camera Feed")  # Create a window to display the camera feed
+    print(f"Press display the {side_hash[side]} side and press the space bar to capture it")
+
+    while True:
+        ret, frame = webcam.read()  # Gets the frame
+
+        if ret:
+
+            cv2.rectangle(frame, (LEFT, TOP), (LEFT + SPACING, TOP + SPACING), BOX_COLOR, BORDER_THICKNESS,)
+            cv2.imshow("Camera Feed", frame)  # Display
+
+            # If space bar is pressed, takes a photo, this method can be found in 'capture.py'
+            if cv2.waitKey(1) & 0xFF == ord(" "):
+                cv2.imwrite(f"centers/side{side}.jpg", frame)
+                print("Photo captured!")
+                side += 1
+                if side != 7:
+                    print(f"Press display the {side_hash[side]} side and press the space bar to capture it")
+
+            if side == 7:  # End when the all sides photos have been taken
+                break
+
+        # Wait for the 'q' key to be pressed to exit the loop
+        if cv2.waitKey(1) & 0xFF == ord("q") or side == 7:
+            break
+
+    # Release the video capture
+    webcam.release()
+    cv2.destroyAllWindows()
+
+def crop_centers():
+    for n in range(1, 7):
+        image = Image.open(f"centers/side{n}.jpg")
+        cropped_image = image.crop((LEFT + SPACING//4, TOP + SPACING//4, LEFT+ 3*SPACING//4, TOP+ 3*SPACING//4))
+        cropped_image.save(f"cropped_centers/cside{n}.jpg")
+        delete_img(f"centers/side{n}.jpg")
+
+def calibrate():
+    print("Show the camera the center of the desired color, then press the space bar to take a photo.")
+    calibrate_colors()
+    crop_centers()
+    center_colors()
+
+
+def center_colors():
+    global YELLOW, BLUE, GREEN, WHITE, RED, ORANGE
+    WHITE = avg_color(f"cropped_centers/cside1.jpg")
+    RED = avg_color(f"cropped_centers/cside2.jpg")
+    BLUE = avg_color(f"cropped_centers/cside3.jpg")
+    ORANGE = avg_color(f"cropped_centers/cside4.jpg")
+    GREEN = avg_color(f"cropped_centers/cside5.jpg")
+    YELLOW =avg_color(f"cropped_centers/cside6.jpg")
+
+
+
 
 def main():
+    answer = input("Welcome to the Rubik's Cube Solver!, would you like to calibrate the colors? (y/n)\n")
+    if answer == "y":
+        calibrate()
     clean_directory()
     show_directions()
     get_cube()  # method to get the cubes photos and screenshots
@@ -333,3 +403,4 @@ if __name__ == "__main__":
     main()
     #color_tester_function()
     #clean_directory()
+
