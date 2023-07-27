@@ -21,7 +21,7 @@ def show_directions():
     img.show_img()
 
 # When showing the cube to the camera, prioritize the white center on top, but if you are showing white or yellow, red should be on top
-def get_cube():
+def get_cube(webcam):
 
     webcam = cv2.VideoCapture(0)  # Default camera on your system
     side = 1  # Pics taken so far // increments by 1 every time photo taken
@@ -316,6 +316,7 @@ def color_tester_function():
 
 
 def calibrate_colors():
+
     webcam = cv2.VideoCapture(0)  # Default camera on your system
     side = 1  # Pics taken so far // increments by 1 every time photo taken
 
@@ -327,7 +328,7 @@ def calibrate_colors():
 
     cv2.namedWindow("Camera Feed")  # Create a window to display the camera feed
     print(f"Press display the {side_hash[side]} side and press the space bar to capture it")
-
+    is_open = True
     while True:
         ret, frame = webcam.read()  # Gets the frame
 
@@ -397,10 +398,15 @@ def load_colors():
     GREEN = color_data["GREEN"]
     YELLOW = color_data["YELLOW"]
 
+def create_missing_folders():
+    required_folders = ["centers", "cropped_centers", "cropped_sides", "faces", "sides", "squares"]
 
-
+    for folder in required_folders:
+        if not os.path.exists(folder):
+            os.makedirs(folder)
 
 def main():
+    create_missing_folders()
     answer = input("Welcome to the Rubik's Cube Solver!, would you like to calibrate the colors? (y/n)\n")
     if answer == "y":
         calibrate()

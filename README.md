@@ -55,7 +55,7 @@ To use the Rubik's Cube Solver, follow the installation steps:
 
 6. A MPL window will appear with your cube and its solution, follow the steps and your cube will be solved.
 
-7. For those unfamiliar with rubiks cube notation, this video explains it well: [![Rubiks Cube Notation Explained](https://www.youtube.com/watch?v=24eHm4ri8WM)
+7. For those unfamiliar with rubiks cube notation, this video explains it well: ![Rubiks Cube Notation Explained](https://www.youtube.com/watch?v=24eHm4ri8WM)
 
 
 ## Project Structure
@@ -63,11 +63,11 @@ The project consists of the following files inside of the RubiksCube folder:
 
 1. `main.py`: The main Python script.
 2. `cube.py`: The file containing the Rubiks cube class and the Cubie class.
-3. `config.py`:A file containing all constants used in the program.
+3. `config.py`: A file containing all constants used in the program.
 4. `color_diff.py`: A file containing color math operations.
 5. `matplot_img.py`: A file containing the Img_MPL class.
 6. `cube_renderer.py`: A file containing the class that renders the cube in MPL
-7. `colors.json.py`: JSON file to store user color data
+7. `colors.json`: JSON file to store user color data
 8. `README.md`: This file, providing an overview of the project.
 
 ## Future Development
