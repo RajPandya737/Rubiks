@@ -1,14 +1,10 @@
 # Rubik's Cube Solver
 
 ## Description
-This Python project aims to solve a Rubik's Cube using computer vision techniques, linear algebra, and MPL simulations. 
+
+This program aims to take photos of each side of your rubik's cube and give you the solution while also simulating it in 3-D space. Using openCV, numpy, matplotlib, colormath, and many other technologies, never before has solving a rubik's cube been as easy as it is right now. Take a look at the youtube video explaining the creation of this project and a short tutorial on how to use it.
 
 ## Link to the YouTube video about this project is [here](https://www.youtube.com/watch?v=8CAep-V3u5w)
-
-![image](https://github.com/RajPandya737/Rubiks-Cube-Solver/assets/99134716/e3365be1-ebbe-4bb9-a956-06a15aec9acc)
-![image](https://github.com/RajPandya737/Rubiks-Cube-Solver/assets/99134716/df2e4f70-ca6b-44fe-8565-aaeebf2b8aeb)
-
-**Note: the cube scans all faces and then plots them on the cube in the simulation
 
 
 ## Installation
