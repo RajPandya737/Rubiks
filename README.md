@@ -9,8 +9,6 @@ This Python project aims to solve a Rubik's Cube using computer vision technique
 **Note: the cube scans all faces and then plots them on the cube in the simulation
 
 
-
-
 ## Installation
 
 To use the Rubik's Cube Solver, follow these steps to set up the project:
@@ -49,15 +47,17 @@ To use the Rubik's Cube Solver, follow the installation steps:
 
 2. Run the file, whithin the terminal, you will be asked to calibrate your cube, if this is your first time running the program, it is highly recommended.
 
-3. If you choose yes, scan the center of each face of the desired color the terminal asks:
+3. If you choose yes, scan the center of each face of the desired color the camera window asks, it will appear as the title of the window:
 
-4. You will then be shown a tutorial of how to use the program, here is a quick recap, when shwoing the sides with a center color yellow or whie, red should face upwards, in all other cases, white should be facing upwards.
+4. You will then be shown a tutorial of how to use the program, here is a quick recap, when shwoing the sides with a center color yellow or white, red should face upwards, in all other cases, white should be facing upwards.
 
 5. Scan your cube in any order you like, just follow the rules from step 3
 
-6. A MPL window will appear with your cube and its solution, follow the steps and your cube will be solved.
+6. A window will appear with your cube and its solution, follow the steps and your cube will be solved.
 
-7. For those unfamiliar with rubiks cube notation, this video explains it well: ![Rubiks Cube Notation Explained](https://www.youtube.com/watch?v=24eHm4ri8WM)
+7. For those unfamiliar with rubiks cube notation, this video explains it well: [Rubiks Cube Notation Explained](https://www.youtube.com/watch?v=24eHm4ri8WM)
+
+8. If you would like to exit the program at any time, press the 'q' key while the camera is open, or close out of the program with your mouse while the simulation is open.
 
 
 ## Project Structure
@@ -75,7 +75,7 @@ The project consists of the following files inside of the RubiksCube folder:
 ## Future Development
 As mentioned earlier, this project is still in development. Here are some potential improvements that may be implemented in the future:
 
-- Implement more GUI program interactions, the terminal is not user-friendly
+- Implement more GUI program interactions
 - Ability to have more interactions within the MPL diagram
 
 
