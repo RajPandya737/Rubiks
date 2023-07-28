@@ -1,7 +1,9 @@
 # Rubik's Cube Solver
 
 ## Description
-This Python project aims to solve a Rubik's Cube using computer vision techniques, linear algebra, and MPL simulations. Please note that this project is currently under development.
+This Python project aims to solve a Rubik's Cube using computer vision techniques, linear algebra, and MPL simulations. 
+
+## Link to the YouTube video about this project is [here](https://www.youtube.com/watch?v=8CAep-V3u5w)
 
 ![image](https://github.com/RajPandya737/Rubiks-Cube-Solver/assets/99134716/e3365be1-ebbe-4bb9-a956-06a15aec9acc)
 ![image](https://github.com/RajPandya737/Rubiks-Cube-Solver/assets/99134716/df2e4f70-ca6b-44fe-8565-aaeebf2b8aeb)
@@ -71,13 +73,6 @@ The project consists of the following files inside of the RubiksCube folder:
 6. `cube_renderer.py`: A file containing the class that renders the cube in MPL
 7. `colors.json`: JSON file to store user color data
 8. `README.md`: This file, providing an overview of the project.
-
-## Future Development
-As mentioned earlier, this project is still in development. Here are some potential improvements that may be implemented in the future:
-
-- Implement more GUI program interactions
-- Ability to have more interactions within the MPL diagram
-
 
 ## License
 
