@@ -17,9 +17,11 @@ from cube_renderer import Cube_MPL
 import json
 import easygui as eg
 
+
 def show_directions():
     img = Img_MPL("images/instructions.png", "Tutorial")
     img.show_img()
+
 
 # When showing the cube to the camera, prioritize the white center on top, but if you are showing white or yellow, red should be on top
 def get_cube():
@@ -33,6 +35,7 @@ def get_cube():
         exit()
 
     while True:
+        text = f"Current Side: {side}"
         ret, frame = webcam.read()  # Gets the frame
 
         if ret:
@@ -48,12 +51,12 @@ def get_cube():
                         BORDER_THICKNESS,
                     )
 
-            cv2.imshow("Camera Feed Full Cube", frame)  # Display
+            cv2.imshow(text, frame)  # Display
 
             # If space bar is pressed, takes a photo, this method can be found in 'capture.py'
             if cv2.waitKey(1) & 0xFF == ord(" "):
                 cv2.imwrite(f"sides/side{side}.jpg", frame)
-                print("Photo captured!")
+                cv2.destroyAllWindows()
                 side += 1
 
             if side == 7:  # End when the all sides photos have been taken
@@ -83,7 +86,7 @@ def convert_to_img():
         sys.exit()
 
 
-def delete_img(path):
+def delete_img(path: str):
     if os.path.exists(path):
         os.remove(path)
     else:
@@ -100,7 +103,7 @@ def clean_directory():
                 os.remove(file_path)
 
 
-def squarify(n):
+def squarify(n: int):
     image = Image.open(f"cropped_sides/cside{n}.jpg")
     # Turn each images sides into 9 squares with their own color
     for i in range(3):
@@ -122,7 +125,7 @@ def squarify(n):
 color_function = lambda x: real_color(avg_color(x))[4]
 
 
-def avg_color(path):
+def avg_color(path: str):
     # Turns the image into a 1x1 pixel which automatically takes the average pixel value
     image = Image.open(path)
     resized_image = image.resize((1, 1))
@@ -130,7 +133,7 @@ def avg_color(path):
     return rgb
 
 
-def real_color(avg):
+def real_color(avg: list or tuple):
     # Basically a bunch of annopying conversions, convert rgb to sRGB then to
     # Lab Colors so you can finally compare them using a Delta E equation
     # Find which color is the closest (lower delta E means closer color) and
@@ -141,10 +144,10 @@ def real_color(avg):
     colors_hash = {
         "White": WHITE,
         "Red": RED,
-        "Blue": BLUE, 
-        "Orange": ORANGE, 
-        "Green": GREEN, 
-        "Yellow": YELLOW 
+        "Blue": BLUE,
+        "Orange": ORANGE,
+        "Green": GREEN,
+        "Yellow": YELLOW,
     }
 
     color_to_abreviation = {
@@ -155,7 +158,6 @@ def real_color(avg):
         "Green": "g",
         "Yellow": "y",
     }
-
 
     avg = sRGBColor(avg[0], avg[1], avg[2])
     lab_color = convert_color(avg, LabColor)
@@ -209,7 +211,7 @@ def convert_to_np():
         Cubie(-1, 0, 0, ("b", None, None), "center"),
     ]
 
-    #White Side Cubies
+    # White Side Cubies
 
     color_x = color_function(f"faces/Blue/cside{1}.jpg")
     color_y = color_function(f"faces/Red/cside{3}.jpg")
@@ -229,7 +231,6 @@ def convert_to_np():
     color_z = color_function(f"faces/White/cside{4}.jpg")
     cubies.append(Cubie(-1, 0, 1, (color_x, None, color_z), "edge"))
 
-
     color_x = color_function(f"faces/Green/cside{2}.jpg")
     color_z = color_function(f"faces/White/cside{6}.jpg")
     cubies.append(Cubie(1, 0, 1, (color_x, None, color_z), "edge"))
@@ -248,12 +249,11 @@ def convert_to_np():
     color_z = color_function(f"faces/White/cside{9}.jpg")
     cubies.append(Cubie(1, -1, 1, (color_x, color_y, color_z), "corner"))
 
-    
     # Center Cubies
     color_x = color_function(f"faces/Green/cside{6}.jpg")
     color_y = color_function(f"faces/Red/cside{4}.jpg")
     cubies.append(Cubie(1, 1, 0, (color_x, color_y, None), "edge"))
-    
+
     color_x = color_function(f"faces/Blue/cside{4}.jpg")
     color_y = color_function(f"faces/Red/cside{6}.jpg")
     cubies.append(Cubie(-1, 1, 0, (color_x, color_y, None), "edge"))
@@ -265,7 +265,6 @@ def convert_to_np():
     color_x = color_function(f"faces/Green/cside{4}.jpg")
     color_y = color_function(f"faces/Orange/cside{6}.jpg")
     cubies.append(Cubie(1, -1, 0, (color_x, color_y, None), "edge"))
-
 
     # Yellow Side Cubies
 
@@ -287,7 +286,6 @@ def convert_to_np():
     color_z = color_function(f"faces/Yellow/cside{6}.jpg")
     cubies.append(Cubie(-1, 0, -1, (color_x, None, color_z), "edge"))
 
-
     color_x = color_function(f"faces/Green/cside{8}.jpg")
     color_z = color_function(f"faces/Yellow/cside{4}.jpg")
     cubies.append(Cubie(1, 0, -1, (color_x, None, color_z), "edge"))
@@ -305,7 +303,7 @@ def convert_to_np():
     color_y = color_function(f"faces/Orange/cside{9}.jpg")
     color_z = color_function(f"faces/Yellow/cside{7}.jpg")
     cubies.append(Cubie(1, -1, -1, (color_x, color_y, color_z), "corner"))
-    
+
     return Cube(cubies)
 
 
@@ -313,7 +311,6 @@ def color_tester_function():
     # Used to test the color of a collection of images, not used in the actual program
     for n in range(1, 10):
         print(avg_color(f"cside{n}.jpg"))
-
 
 
 def calibrate_colors():
@@ -327,23 +324,25 @@ def calibrate_colors():
         print("Failed to open the camera")
         exit()
 
-    cv2.namedWindow("Only display the center square of the asked color")  # Create a window to display the camera feed
-    print(f"Press display the {side_hash[side]} side and press the space bar to capture it")
+    #cv2.namedWindow('Webcam Stream', cv2.WINDOW_NORMAL)
+    print(
+        f"Press display the {side_hash[side]} side and press the space bar to capture it"
+    )
+
     while True:
+        text = f"Display the {side_hash[side]} center square and press the space bar to capture it"
         ret, frame = webcam.read()  # Gets the frame
 
         if ret:
 
             cv2.rectangle(frame, (LEFT, TOP), (LEFT + SPACING, TOP + SPACING), BOX_COLOR, BORDER_THICKNESS,)
-            cv2.imshow("Camera Feed", frame)  # Display
+            cv2.imshow(text, frame)  # Display
 
             # If space bar is pressed, takes a photo, this method can be found in 'capture.py'
             if cv2.waitKey(1) & 0xFF == ord(" "):
                 cv2.imwrite(f"centers/side{side}.jpg", frame)
-                print("Photo captured!")
+                cv2.destroyAllWindows()
                 side += 1
-                if side != 7:
-                    print(f"Display the {side_hash[side]} side")
 
             if side == 7:  # End when the all sides photos have been taken
                 webcam.release()
@@ -354,26 +353,37 @@ def calibrate_colors():
         if cv2.waitKey(1) & 0xFF == ord("q") or side == 7:
             break
 
+
     # Release the video capture
     webcam.release()
     cv2.destroyAllWindows()
+
 
 def crop_centers():
     # Used for the calibration function to get only the center square of the photo
     for n in range(1, 7):
         image = Image.open(f"centers/side{n}.jpg")
-        cropped_image = image.crop((LEFT + SPACING//4, TOP + SPACING//4, LEFT+ 3*SPACING//4, TOP+ 3*SPACING//4))
+        cropped_image = image.crop(
+            (
+                LEFT + SPACING // 4,
+                TOP + SPACING // 4,
+                LEFT + 3 * SPACING // 4,
+                TOP + 3 * SPACING // 4,
+            )
+        )
         cropped_image.save(f"cropped_centers/cside{n}.jpg")
         delete_img(f"centers/side{n}.jpg")
 
+
 def center_colors():
     # Sets all the colors used in the program based on the image taken
-    color_data = {"WHITE" : avg_color(f"cropped_centers/cside1.jpg"),
-                  "RED" : avg_color(f"cropped_centers/cside2.jpg"),
-                  "BLUE" : avg_color(f"cropped_centers/cside3.jpg"),
-                "ORANGE" : avg_color(f"cropped_centers/cside4.jpg"),
-                "GREEN" : avg_color(f"cropped_centers/cside5.jpg"),
-                "YELLOW" : avg_color(f"cropped_centers/cside6.jpg")
+    color_data = {
+        "WHITE": avg_color(f"cropped_centers/cside1.jpg"),
+        "RED": avg_color(f"cropped_centers/cside2.jpg"),
+        "BLUE": avg_color(f"cropped_centers/cside3.jpg"),
+        "ORANGE": avg_color(f"cropped_centers/cside4.jpg"),
+        "GREEN": avg_color(f"cropped_centers/cside5.jpg"),
+        "YELLOW": avg_color(f"cropped_centers/cside6.jpg"),
     }
 
     with open("colors.json", "w") as file:
@@ -381,7 +391,9 @@ def center_colors():
 
 
 def calibrate():
-    print("Show the camera the center of the desired color, then press the space bar to take a photo.")
+    print(
+        "Show the camera the center of the desired color, then press the space bar to take a photo."
+    )
     calibrate_colors()
     crop_centers()
     center_colors()
@@ -400,20 +412,38 @@ def load_colors():
     GREEN = color_data["GREEN"]
     YELLOW = color_data["YELLOW"]
 
+
 def create_missing_folders():
     # From the github, some folders do not appear, this is to ensure they are present in the program
-    required_folders = ["centers", "cropped_centers", "cropped_sides", "faces", "sides", "squares", "faces/Blue", "faces/Green", "faces/Orange", "faces/Red", "faces/White", "faces/Yellow"]
+    required_folders = [
+        "centers",
+        "cropped_centers",
+        "cropped_sides",
+        "faces",
+        "sides",
+        "squares",
+        "faces/Blue",
+        "faces/Green",
+        "faces/Orange",
+        "faces/Red",
+        "faces/White",
+        "faces/Yellow",
+    ]
 
     for folder in required_folders:
         if not os.path.exists(folder):
             os.makedirs(folder)
 
+
 def ask_calibration():
     # Asks the user if they want to calibrate the colors
     welcome_message = "Welcome to the Rubik's Cube Solver!"
     choices = ["Yes", "No"]
-    response = eg.buttonbox(welcome_message + "\nWould you like to calibrate the colors?", choices=choices)
+    response = eg.buttonbox(
+        welcome_message + "\nWould you like to calibrate the colors?", choices=choices
+    )
     return response
+
 
 def main():
     create_missing_folders()
@@ -423,7 +453,6 @@ def main():
     load_colors()
     clean_directory()
     show_directions()
-    print("Time to scan the cube!")
     get_cube()  # method to get the cubes photos and screenshots
     convert_to_img()
     file_as_color()
@@ -432,10 +461,11 @@ def main():
         cube_simulation = Cube_MPL(Cube)
         cube_simulation.render()
     except:
-        print("Error: Camera quality was too low, the colors could not be picked up, or cube is not solvable")
+        print(
+            "Error: Camera quality was too low, the colors could not be picked up, or cube is not solvable"
+        )
     clean_directory()
-         
+
 
 if __name__ == "__main__":
     main()
-

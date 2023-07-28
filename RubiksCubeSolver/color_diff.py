@@ -1,7 +1,6 @@
-
 # THE FOLLOWING FILE IS NOT MY CODE, I WAS HAVING TROUBLES IMPORTING AND COPIED THE COLOR_DIFF FILE FROM THE GITHUB
-# THIS BELONGS TO KelSolaar 
-# GitHub: https://github.com/gtaylor/python-colormath/tree/master 
+# THIS BELONGS TO KelSolaar
+# GitHub: https://github.com/gtaylor/python-colormath/tree/master
 
 # ----------------------------------------------------------------------------------------------------------------------
 
