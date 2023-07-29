@@ -43,11 +43,11 @@ To use the Rubik's Cube Solver, follow the installation steps:
 
 1. Start with a scrambled rubik's cube you do not know how to solve
 
-2. Run the file, whithin the terminal, you will be asked to calibrate your cube, if this is your first time running the program, it is highly recommended.
+2. Run the file, and you will be asked to calibrate your cube, if this is your first time running the program, it is highly recommended.
 
 3. If you choose yes, scan the center of each face of the desired color the camera window asks, it will appear as the title of the window:
 
-4. You will then be shown a tutorial of how to use the program, here is a quick recap, when shwoing the sides with a center color yellow or white, red should face upwards, in all other cases, white should be facing upwards.
+4. You will then be shown a tutorial of how to use the program, here is a quick recap, when showing the sides with a center color yellow or white, red should face upwards, in all other cases, white should be facing upwards.
 
 5. Scan your cube in any order you like, just follow the rules from step 3
 
