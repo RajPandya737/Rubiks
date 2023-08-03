@@ -49,7 +49,7 @@ To use the Rubik's Cube Solver, follow the installation steps:
 
 4. You will then be shown a tutorial of how to use the program, here is a quick recap, when showing the sides with a center color yellow or white, red should face upwards, in all other cases, white should be facing upwards.
 
-5. Scan your cube in any order you like, just follow the rules from step 3
+5. Scan your cube in any order you like, just follow the rules from step 4
 
 6. A window will appear with your cube and its solution, follow the steps and your cube will be solved.
 
