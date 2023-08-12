@@ -1,10 +1,10 @@
 # Rubik's Cube Solver
 
-## Description
-
-This program aims to take photos of each side of your rubik's cube and give you the solution while also simulating it in 3-D space. Using openCV, numpy, matplotlib, colormath, and many other technologies, never before has solving a rubik's cube been as easy as it is right now. Take a look at the youtube video explaining the creation of this project and a short tutorial on how to use it.
-
 ## Link to the YouTube video about this project is [here](https://www.youtube.com/watch?v=8CAep-V3u5w)
+
+
+## Description
+This program aims to take photos of each side of your rubik's cube and give you the solution while also simulating it in 3-D space. Using openCV, numpy, matplotlib, colormath, and many other technologies, never before has solving a rubik's cube been as easy as it is right now. Take a look at the youtube video explaining the creation of this project and a short tutorial on how to use it.
 
 
 ## Installation
